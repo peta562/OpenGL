@@ -1,0 +1,4 @@
+﻿  ConsoleApplication5.cpp
+C:\Users\Пётр\source\repos\ConsoleApplication5\ConsoleApplication5\ConsoleApplication5.cpp(60,9): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+C:\Users\Пётр\source\repos\ConsoleApplication5\ConsoleApplication5\ConsoleApplication5.cpp(62,9): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+  ConsoleApplication5.vcxproj -> C:\Users\Пётр\source\repos\ConsoleApplication5\Debug\ConsoleApplication5.exe
