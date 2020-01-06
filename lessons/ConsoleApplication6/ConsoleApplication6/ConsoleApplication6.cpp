@@ -9,27 +9,60 @@ float red = 1.0f, blue = 1.0f, green = 1.0f;
 // угол
 float angle = 0.0f;
 
+// координаты вектора направления движения камеры
+float lx = 0.0f, lz = -1.0f;
+// XZ позиция камеры
+float x = 0.0f, z = 5.0f;
+
 void processNormalKeys(unsigned char key, int x, int y) {
     if (key == 27)
         exit(0);
 }
+void drawSnowMan() {
+
+    glColor3f(1.0f, 1.0f, 1.0f);
+
+    // тело снеговика
+    glTranslatef(0.0f, 0.75f, 0.0f);
+    glutSolidSphere(0.75f, 20, 20);
+
+    // голова снеговика
+    glTranslatef(0.0f, 1.0f, 0.0f);
+    glutSolidSphere(0.25f, 20, 20);
+    // глаза снеговика
+    glPushMatrix();
+    glColor3f(0.0f, 0.0f, 0.0f);
+    glTranslatef(0.05f, 0.10f, 0.18f);
+    glutSolidSphere(0.05f, 10, 10);
+    glTranslatef(-0.1f, 0.0f, 0.0f);
+    glutSolidSphere(0.05f, 10, 10);
+    glPopMatrix();
+    // нос снеговика
+    glColor3f(1.0f, 0.5f, 0.5f);
+    glRotatef(0.0f, 1.0f, 0.0f, 0.0f);
+    glutSolidCone(0.08f, 0.5f, 10, 2);
+}
 
 void processSpecialKeys(int key, int x, int y) {
+    float fraction = 0.1f;
     switch (key) {
-    case GLUT_KEY_F1:
-        red = 1.0;
-        green = 0.0;
-        blue = 0.0; 
+    case GLUT_KEY_LEFT:
+        angle -= 0.01f;
+        lx = sin(angle);
+        lz = -cos(angle);
         break;
-    case GLUT_KEY_F2:
-        red = 0.0;
-        green = 1.0;
-        blue = 0.0; 
+    case GLUT_KEY_RIGHT:
+        angle += 0.01f;
+        lx = sin(angle);
+        lz = -cos(angle);
         break;
-    case GLUT_KEY_F3:
-        red = 0.0;
-        green = 0.0;
-        blue = 1.0; 
+    case GLUT_KEY_UP:
+        x += lx * fraction;
+        z += lz * fraction;
+        break;
+    case GLUT_KEY_DOWN:
+        x -= lx * fraction;
+        z -= lz * fraction;
         break;
     }
 }
@@ -39,22 +72,30 @@ void renderScene(void)
 
     glLoadIdentity();
     // установка камеры
-    gluLookAt(0.0f, 0.0f, 4.0f,
-        0.0f, 0.0f, 0.0f,
-        0.0f, 1.0f, 0.0f);
-    
-    //поворот на заданную величину
-    glRotatef(angle, 0.0f, 1.0f, 0.0f);
+    gluLookAt(x, 1.0f, z, // положение камеры
+        x + lx, 1.0f, z + lz,  // направление вектора обзора
+        0.0f, 1.0f, 0.0f); // наклон камеры
 
-    // установить цвет модели
-    glColor3f(red, green, blue);
-    glBegin(GL_TRIANGLES);
-      glVertex3f(-0.5, -0.5, 0.0);
-      glVertex3f(0.0, 0.5, 0.0);
-      glVertex3f(0.5, -0.5, 0.0);
+
+    // нарисуем "землю"
+    glColor3f(0.9f, 0.9f, 0.9f);
+    glBegin(GL_QUADS); // полигон с коондинатами
+    glVertex3f(-100.0f, 0.0f, -100.0f);
+    glVertex3f(-100.0f, 0.0f, 100.0f);
+    glVertex3f(100.0f, 0.0f, 100.0f);
+    glVertex3f(100.0f, 0.0f, -100.0f);
     glEnd();
 
-    angle += 0.5f;
+    // Нарисуем 64 снеговика
+    for (int i = -4; i < 4; i++)
+        for (int j = -4; j < 4; j++) 
+        {
+            glPushMatrix();
+            glTranslatef(i * 5.0, 0, j * 5.0);
+            drawSnowMan();
+            glPopMatrix();
+        }
+
 
     glutSwapBuffers();
 }
@@ -97,10 +138,12 @@ int main(int argc, char** argv)
     glutDisplayFunc(renderScene);
     glutReshapeFunc(changeSize);
     glutIdleFunc(renderScene);
-
-    // Новые функции
     glutKeyboardFunc(processNormalKeys);
     glutSpecialFunc(processSpecialKeys);
+
+    // Новые функции
+    
+    glEnable(GL_DEPTH_TEST); // Инициализация OpenGL функции теста
 
     // цикл обработки событий
     glutMainLoop();

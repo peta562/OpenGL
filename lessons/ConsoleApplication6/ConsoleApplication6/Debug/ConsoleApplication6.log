@@ -1,3 +1,7 @@
 ﻿  ConsoleApplication6.cpp
-C:\Users\Пётр\source\repos\OpenGL\lessons\ConsoleApplication6\ConsoleApplication6\ConsoleApplication6.cpp(68,17): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\Пётр\source\repos\OpenGL\lessons\ConsoleApplication6\ConsoleApplication6\ConsoleApplication6.cpp(60,27): warning C4244: +=: преобразование "float" в "int", возможна потеря данных
+C:\Users\Пётр\source\repos\OpenGL\lessons\ConsoleApplication6\ConsoleApplication6\ConsoleApplication6.cpp(64,27): warning C4244: -=: преобразование "float" в "int", возможна потеря данных
+C:\Users\Пётр\source\repos\OpenGL\lessons\ConsoleApplication6\ConsoleApplication6\ConsoleApplication6.cpp(94,40): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\Пётр\source\repos\OpenGL\lessons\ConsoleApplication6\ConsoleApplication6\ConsoleApplication6.cpp(94,28): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\Пётр\source\repos\OpenGL\lessons\ConsoleApplication6\ConsoleApplication6\ConsoleApplication6.cpp(109,17): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
   ConsoleApplication6.vcxproj -> C:\Users\Пётр\source\repos\OpenGL\lessons\ConsoleApplication6\Debug\ConsoleApplication6.exe
