@@ -2,6 +2,8 @@
 #include <freeglut.h>
 #include <stdlib.h>
 
+float deltaAngle = 0.0f;
+int xOrigin = -1;
 
 // цвет
 float red = 1.0f, blue = 1.0f, green = 1.0f;
@@ -13,6 +15,36 @@ float angle = 0.0f;
 float lx = 0.0f, lz = -1.0f;
 // XZ позиция камеры
 float x = 0.0f, z = 5.0f;
+
+void mouseButton(int button, int state, int x, int y) {
+
+    // только при начале движения, если нажата левая кнопка
+    if (button == GLUT_LEFT_BUTTON) {
+
+        // когда кнопка отпущена
+        if (state == GLUT_UP) {
+            angle += deltaAngle;
+            xOrigin = -1;
+        }
+        else {// state = GLUT_DOWN
+            xOrigin = x;
+        }
+    }
+}
+
+void mouseMove(int x, int y) {
+
+    // если левая кнопка опущена
+    if (xOrigin >= 0) {
+
+        // обновить deltaAngle
+        deltaAngle = (x - xOrigin) * 0.001f;
+
+        // Обновление направления камеры
+        lx = sin(angle + deltaAngle);
+        lz = -cos(angle + deltaAngle);
+    }
+}
 
 void processNormalKeys(unsigned char key, int x, int y) {
     if (key == 27)
@@ -142,9 +174,11 @@ int main(int argc, char** argv)
     glutSpecialFunc(processSpecialKeys);
 
     // Новые функции
-    
-    glEnable(GL_DEPTH_TEST); // Инициализация OpenGL функции теста
+    glutMouseFunc(mouseButton);
+    glutMotionFunc(mouseMove);
 
+    glEnable(GL_DEPTH_TEST); // Инициализация OpenGL функции теста
+    
     // цикл обработки событий
     glutMainLoop();
 
