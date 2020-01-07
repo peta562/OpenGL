@@ -1,0 +1,11 @@
+﻿  task.cpp
+C:\Users\Пётр\source\repos\OpenGL\tasks\task\task\task.cpp(13,14): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\Пётр\source\repos\OpenGL\tasks\task\task\task.cpp(39,25): warning C4305: аргумент: усечение из "double" в "GLfloat"
+C:\Users\Пётр\source\repos\OpenGL\tasks\task\task\task.cpp(41,16): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\Пётр\source\repos\OpenGL\tasks\task\task\task.cpp(42,16): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\Пётр\source\repos\OpenGL\tasks\task\task\task.cpp(49,26): warning C4305: аргумент: усечение из "double" в "GLfloat"
+C:\Users\Пётр\source\repos\OpenGL\tasks\task\task\task.cpp(51,16): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\Пётр\source\repos\OpenGL\tasks\task\task\task.cpp(52,16): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\Пётр\source\repos\OpenGL\tasks\task\task\task.cpp(59,11): warning C4305: +=: усечение из "double" в "float"
+C:\Users\Пётр\source\repos\OpenGL\tasks\task\task\task.cpp(65,11): warning C4305: -=: усечение из "double" в "float"
+  task.vcxproj -> C:\Users\Пётр\source\repos\OpenGL\tasks\task\Debug\task.exe
