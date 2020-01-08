@@ -4,11 +4,14 @@
 using namespace std;
 
 // размеры координатной сетки
-float mx = 10.0;
-float my = 10.0;
+float mx = 1.0;
+float my = 1.0;
+
 
 float dx = 0.0;
 float dy = 0.0;
+
+float angle = 0.0;
 
 void processNormalKeys(unsigned char key, int x, int y) {
 	switch (key)
@@ -17,13 +20,20 @@ void processNormalKeys(unsigned char key, int x, int y) {
 		exit(0);
 		break;
 	case 109:
-		mx += 1.0;
-		my += 1.0;
+		mx += 0.1;
+		my += 0.1;
 		break;
 	case 110:
-		mx -= 1.0;
-		my -= 1.0;
+		mx -= 0.1;
+		my -= 0.1;
 		break;
+	case 122:
+		angle += 1.0;
+		break;
+	case 99:
+		angle -= 1.0;
+		break;
+
 	}
 	glutPostRedisplay();
 }
@@ -57,9 +67,9 @@ void changeSize(int w, int h)
 	glLoadIdentity();
 
 	// определяем окно просмотра
-	glViewport(0, 0, w + mx, h + my);
-
-	gluOrtho2D(-mx, mx, -my, my);
+	glViewport(0, 0, w, h);
+	
+	gluOrtho2D(-10, 10, -10, 10);
 	//gluLookAt(0, 0, 5, 0, 0, 0, 0, 1, 0);
 
 	// вернуться к модели
@@ -93,13 +103,15 @@ void renderScene(void)
 
     glBegin(GL_LINES); //сетка
 		glColor3d(1, 1, 1);
-		glVertex2d(-mx, 0);
-		glVertex2d(mx, 0);
-		glVertex2d(0, -my);
-		glVertex2d(0, my);
+		glVertex2d(-10, 0);
+		glVertex2d(10, 0);
+		glVertex2d(0, -10);
+		glVertex2d(0, 10);
 	glEnd();
 
 	glPushMatrix();
+	glScalef(mx, my, 1.0f);
+	glRotatef(angle, 0.0, 0.0, 1.0);
 	glTranslatef(dx, dy, 0.0);
 	drawObject();
 	glPopMatrix();
